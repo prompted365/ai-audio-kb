@@ -217,9 +217,9 @@ class AIAudioKBServer {
    */
   async initializeServices() {
     try {
-      logger.info('Initializing database connection...');
-      await database.migrate.latest();
-      logger.info('Database migrations completed');
+      logger.info('Initializing MongoDB Atlas connection...');
+      await database.connect();
+      logger.info('MongoDB Atlas connection established');
 
       logger.info('Initializing Redis connection...');
       await redisClient.ping();
@@ -260,7 +260,7 @@ class AIAudioKBServer {
 
       // Close database connections
       if (database) {
-        await database.destroy();
+        await database.disconnect();
         logger.info('Database connections closed');
       }
 

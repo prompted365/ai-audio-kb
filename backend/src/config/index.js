@@ -47,7 +47,7 @@ function parseArray(value, defaultValue = []) {
  */
 function validateRequired(config) {
   const required = [
-    'DATABASE_URL',
+    'MONGODB_URI',
     'REDIS_URL', 
     'JWT_SECRET',
     'DEEPGRAM_API_KEY',
@@ -77,19 +77,22 @@ export const config = {
   API_VERSION: process.env.API_VERSION || 'v1',
   BASE_URL: process.env.BASE_URL || `http://localhost:${process.env.PORT || 3000}`,
 
-  // Database Configuration
-  DATABASE_URL: process.env.DATABASE_URL,
-  DB_HOST: process.env.DB_HOST || 'localhost',
-  DB_PORT: parseInt(process.env.DB_PORT, 5432),
-  DB_NAME: process.env.DB_NAME || 'ai_audio_kb',
-  DB_USER: process.env.DB_USER || 'ai_audio_kb_user',
-  DB_PASSWORD: process.env.DB_PASSWORD,
-  DB_SSL: parseBoolean(process.env.DB_SSL, false),
-  DB_POOL_MIN: parseInt(process.env.DB_POOL_MIN, 2),
-  DB_POOL_MAX: parseInt(process.env.DB_POOL_MAX, 20),
+  // MongoDB Atlas Configuration
+  MONGODB_URI: process.env.MONGODB_URI,
+  MONGODB_DB_NAME: process.env.MONGODB_DB_NAME || 'ai_audio_kb',
+  MONGODB_POOL_SIZE: parseInt(process.env.MONGODB_POOL_SIZE, 20),
+  MONGODB_MAX_IDLE_TIME: parseInt(process.env.MONGODB_MAX_IDLE_TIME, 30000),
+  MONGODB_SERVER_SELECTION_TIMEOUT: parseInt(process.env.MONGODB_SERVER_SELECTION_TIMEOUT, 5000),
+  MONGODB_SOCKET_TIMEOUT: parseInt(process.env.MONGODB_SOCKET_TIMEOUT, 45000),
   
-  // Test Database (for development/testing)
-  TEST_DATABASE_URL: process.env.TEST_DATABASE_URL,
+  // Vector Search Configuration
+  VECTOR_INDEX_NAME: process.env.VECTOR_INDEX_NAME || 'audio_embeddings_index',
+  VECTOR_DIMENSIONS: parseInt(process.env.VECTOR_DIMENSIONS, 768),
+  VECTOR_SIMILARITY: process.env.VECTOR_SIMILARITY || 'cosine',
+  
+  // Atlas Search Configuration
+  SEARCH_INDEX_NAME: process.env.SEARCH_INDEX_NAME || 'audio_text_search',
+  SEARCH_ANALYZER: process.env.SEARCH_ANALYZER || 'english',
 
   // Redis Configuration
   REDIS_URL: process.env.REDIS_URL || 'redis://localhost:6379',
@@ -222,7 +225,7 @@ if (!config.IS_TEST) {
     logger.info('Configuration validated successfully', {
       nodeEnv: config.NODE_ENV,
       port: config.PORT,
-      databaseConfigured: !!config.DATABASE_URL,
+      mongodbConfigured: !!config.MONGODB_URI,
       redisConfigured: !!config.REDIS_URL,
       deepgramConfigured: !!config.DEEPGRAM_API_KEY,
       openaiConfigured: !!config.OPENAI_API_KEY
