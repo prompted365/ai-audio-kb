@@ -1,0 +1,335 @@
+# =============================================================================
+# AI Audio KB - Comprehensive .gitignore
+# =============================================================================
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.crt
+secrets/
+config/google-service-account.json
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# =============================================================================
+# Node.js / Backend
+# =============================================================================
+
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+
+# nyc test coverage
+.nyc_output
+
+# Grunt intermediate storage
+.grunt
+
+# Bower dependency directory
+bower_components
+
+# node-waf configuration
+.lock-wscript
+
+# Compiled binary addons
+build/Release
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional stylelint cache
+.stylelintcache
+
+# Microbundle cache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# dotenv environment variables file
+.env.test
+
+# parcel-bundler cache
+.cache
+.parcel-cache
+
+# Stores VSCode versions used for testing VSCode extensions
+.vscode-test
+
+# yarn v2
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
+
+# =============================================================================
+# iOS / Xcode
+# =============================================================================
+
+# Xcode
+build/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata/
+*.xccheckout
+*.moved-aside
+DerivedData
+*.hmap
+*.ipa
+*.xcuserstate
+*.xcscmblueprint
+*.xcscheme
+
+# CocoaPods
+ios/Pods/
+ios/Podfile.lock
+
+# Carthage
+Carthage/Build/
+
+# Swift Package Manager
+.build/
+Packages/
+Package.pins
+Package.resolved
+*.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/
+
+# fastlane
+ios/fastlane/report.xml
+ios/fastlane/Preview.html
+ios/fastlane/screenshots/**/*.png
+ios/fastlane/test_output
+
+# Code Injection
+iOSInjectionProject/
+
+# =============================================================================
+# Database & Infrastructure
+# =============================================================================
+
+# Database files
+*.sqlite
+*.sqlite3
+*.db
+*.db-journal
+*.db-shm
+*.db-wal
+
+# PostgreSQL
+*.backup
+*.dump
+*.sql.gz
+
+# Redis
+dump.rdb
+appendonly.aof
+
+# =============================================================================
+# Logs & Monitoring
+# =============================================================================
+
+# Log files
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Runtime logs
+*.log.*
+*.out
+*.err
+
+# Application logs
+app.log*
+error.log*
+combined.log*
+
+# =============================================================================
+# Cloud & Deployment
+# =============================================================================
+
+# AWS
+.aws/
+*.pem
+
+# Docker
+.dockerignore
+docker-compose.override.yml
+
+# Kubernetes
+k8s/secrets/
+k8s/*.secret.yaml
+
+# Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+
+# =============================================================================
+# Development Tools
+# =============================================================================
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files
+tmp/
+temp/
+.tmp/
+
+# Editor backups
+*~
+*.bak
+*.backup
+*.orig
+*.rej
+
+# =============================================================================
+# Audio & Media Files (for development)
+# =============================================================================
+
+# Audio samples and test files
+*.wav
+*.mp3
+*.m4a
+*.aac
+*.opus
+*.flac
+test-audio/
+samples/
+recordings/
+
+# =============================================================================
+# Documentation Build
+# =============================================================================
+
+# Generated documentation
+docs/_build/
+docs/.doctrees/
+site/
+
+# =============================================================================
+# Testing & Coverage
+# =============================================================================
+
+# Test artifacts
+test-results/
+test-reports/
+coverage/
+.coverage
+htmlcov/
+.pytest_cache/
+.coverage.*
+
+# Performance test results
+benchmark-results/
+performance-reports/
+
+# =============================================================================
+# Package Managers & Dependencies
+# =============================================================================
+
+# npm
+package-lock.json
+yarn.lock
+
+# Bundler
+vendor/bundle/
+
+# Pip
+pip-log.txt
+pip-delete-this-directory.txt
+
+# =============================================================================
+# AI/ML Model Files (if any)
+# =============================================================================
+
+# Model files
+*.pkl
+*.joblib
+*.h5
+*.pb
+models/
+checkpoints/
+
+# =============================================================================
+# Project-specific
+# =============================================================================
+
+# Audio processing temporary files
+audio-chunks/
+transcripts/
+embeddings/
+
+# Configuration overrides
+config/local.json
+config/development.local.json
+config/production.local.json
+
+# Generated API documentation
+api-docs/
+swagger-ui/
+
+# Performance benchmarks
+benchmarks/
+profiling/
+
+# Security scan results
+security-reports/
+vulnerability-reports/
+
+# Backup files
+*.backup
+backups/
