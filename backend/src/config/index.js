@@ -87,12 +87,21 @@ export const config = {
   
   // Vector Search Configuration
   VECTOR_INDEX_NAME: process.env.VECTOR_INDEX_NAME || 'audio_embeddings_index',
-  VECTOR_DIMENSIONS: parseInt(process.env.VECTOR_DIMENSIONS, 768),
+  VECTOR_DIMENSIONS: parseInt(process.env.VECTOR_DIMENSIONS, 1024), // Voyage-context-3 default
   VECTOR_SIMILARITY: process.env.VECTOR_SIMILARITY || 'cosine',
+  VECTOR_SUPPORTED_DIMS: parseArray(process.env.VECTOR_SUPPORTED_DIMS, ['1536', '1024', '768']),
   
-  // Atlas Search Configuration
+  // Atlas Search Configuration  
   SEARCH_INDEX_NAME: process.env.SEARCH_INDEX_NAME || 'audio_text_search',
   SEARCH_ANALYZER: process.env.SEARCH_ANALYZER || 'english',
+  
+  // Hybrid Search (RRF) Configuration
+  HYBRID_VECTOR_WEIGHT: parseFloat(process.env.HYBRID_VECTOR_WEIGHT, 0.6),
+  HYBRID_TEXT_WEIGHT: parseFloat(process.env.HYBRID_TEXT_WEIGHT, 0.4),
+  HYBRID_TOP_K: parseInt(process.env.HYBRID_TOP_K, 20),
+  HYBRID_VECTOR_CANDIDATES: parseInt(process.env.HYBRID_VECTOR_CANDIDATES, 100),
+  HYBRID_NUM_CANDIDATES: parseInt(process.env.HYBRID_NUM_CANDIDATES, 1000),
+  HYBRID_MIN_SCORE: parseFloat(process.env.HYBRID_MIN_SCORE, 0.7),
 
   // Redis Configuration
   REDIS_URL: process.env.REDIS_URL || 'redis://localhost:6379',
@@ -132,12 +141,25 @@ export const config = {
   GOOGLE_STT_MODEL: process.env.GOOGLE_STT_MODEL || 'latest_short',
   GOOGLE_STT_LANGUAGE: process.env.GOOGLE_STT_LANGUAGE || 'en-US',
 
-  // OpenAI Configuration
+  // OpenAI Configuration (Legacy Support)
   OPENAI_API_KEY: process.env.OPENAI_API_KEY,
   OPENAI_ORGANIZATION: process.env.OPENAI_ORGANIZATION,
   OPENAI_EMBEDDING_MODEL: process.env.OPENAI_EMBEDDING_MODEL || 'text-embedding-3-small',
-  OPENAI_EMBEDDING_DIMENSIONS: parseInt(process.env.OPENAI_EMBEDDING_DIMENSIONS, 768),
+  OPENAI_EMBEDDING_DIMENSIONS: parseInt(process.env.OPENAI_EMBEDDING_DIMENSIONS, 1536),
   OPENAI_MAX_TOKENS: parseInt(process.env.OPENAI_MAX_TOKENS, 4096),
+  
+  // Voyage AI Configuration (Primary Embeddings)
+  VOYAGE_API_KEY: process.env.VOYAGE_API_KEY,
+  VOYAGE_EMBEDDING_MODEL: process.env.VOYAGE_EMBEDDING_MODEL || 'voyage-context-3',
+  VOYAGE_EMBEDDING_DIMENSIONS: parseInt(process.env.VOYAGE_EMBEDDING_DIMENSIONS, 1024),
+  VOYAGE_RERANK_MODEL: process.env.VOYAGE_RERANK_MODEL || 'rerank-2.5',
+  VOYAGE_CONTEXT_WINDOW: parseInt(process.env.VOYAGE_CONTEXT_WINDOW, 3), // segments
+  
+  // Embedding Provider Configuration
+  EMBEDDING_PROVIDER: process.env.EMBEDDING_PROVIDER || 'voyage', // voyage|openai|auto
+  EMBEDDING_FALLBACK_ENABLED: parseBoolean(process.env.EMBEDDING_FALLBACK_ENABLED, true),
+  RERANKING_ENABLED: parseBoolean(process.env.RERANKING_ENABLED, true),
+  RERANKING_TOP_K: parseInt(process.env.RERANKING_TOP_K, 20),
 
   // Langfuse Configuration
   LANGFUSE_SECRET_KEY: process.env.LANGFUSE_SECRET_KEY,
